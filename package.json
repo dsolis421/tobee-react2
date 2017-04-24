@@ -1,0 +1,42 @@
+{
+  "name": "tobee-react2-server",
+  "version": "1.0.0",
+  "description": "Product dev and POC for pet adoption network",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "api-dev": "nodemon --exec \"babel-node src/index\"",
+    "test": "npm run lint",
+    "dev": "nf start",
+    "build-client": "cd client && npm run build",
+    "clean-assets": "rm -rf ./public/*",
+    "copy-assets": "mkdir -p ./public && cp -R ./client/build/* ./public",
+    "compile-server": "rm -rf ./dist && babel src --out-dir dist",
+    "pre-deploy": "npm run compile-server && npm run build-client && npm run clean-assets && npm run copy-assets",
+    "start": "node ./dist/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsolis421/tobee-react2.git"
+  },
+  "keywords": [
+    "pet",
+    "network"
+  ],
+  "author": "Danny Solis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dsolis421/tobee-react2/issues"
+  },
+  "homepage": "https://github.com/dsolis421/tobee-react2#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "eslint": "^3.19.0",
+    "foreman": "^2.0.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
