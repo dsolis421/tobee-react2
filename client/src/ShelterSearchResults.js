@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const ShelterSearchResults = props => {
   return (
-    <div>
+    <div id="shelter-results">
       {props.returnedShelters.map(shelter => {
         return (
           <div key={shelter.id.$t}>
