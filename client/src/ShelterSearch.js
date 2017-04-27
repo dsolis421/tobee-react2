@@ -4,12 +4,32 @@ import ShelterSearchResults from './ShelterSearchResults';
 
 class ShelterSearch extends Component {
   constructor() {
-    super()
+    super();
+
+    this.greetingIterator = 1;
 
     this.state = {
       shelterSearchText: '',
-      returnedShelters: []
-    }
+      returnedShelters: [],
+      greeting: 'pet'
+    };
+  }
+
+  componentDidMount() {
+    setInterval(this.cycleGreeting.bind(this),5000);
+  }
+
+  cycleGreeting() {
+      const greet = ["pet","friend","family member", "cuddle buddy"];
+      let i = this.greetingIterator;
+      this.setState({
+        greeting: greet[i]
+      });
+      if(i === 3) {
+        this.greetingIterator = 0;
+      } else {
+        this.greetingIterator += 1;
+      }
   }
 
   handleSearchChange(e) {
@@ -33,15 +53,18 @@ class ShelterSearch extends Component {
   render() {
     return (
       <div>
-        <div id="sheltersearch">
-          <input id="shelterzip"
-            placeholder="Enter Zip Code"
-            maxLength="5"
-            onChange={event => this.handleSearchChange(event)}></input>
-          <div id="sheltersearchgo" onClick={() => this.getSheltersByZip(this.state.shelterSearchText)}>
-            Search Shelters <span className="fa fa-search"></span>
+        <div id="shelter-search-wrapper">
+          <div id="sheltersearch">
+            <h2>Let us help you find a {this.state.greeting}</h2>
+            <input id="shelterzip"
+              placeholder="Enter Zip Code"
+              maxLength="5"
+              onChange={event => this.handleSearchChange(event)}></input>
+            <div id="sheltersearchgo" onClick={() => this.getSheltersByZip(this.state.shelterSearchText)}>
+              Search Shelters <span className="fa fa-search"></span>
+            </div>
+            <span>Powered by <a href="www.petfinder.com" target="blank">Petfinder</a></span>
           </div>
-          <h5>Powered by <a href="www.petfinder.com" target="blank">Petfinder</a></h5>
         </div>
         <ShelterSearchResults returnedShelters={this.state.returnedShelters} />
       </div>

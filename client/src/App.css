@@ -1,18 +1,32 @@
 .App {
   text-align: center;
+  font-family: 'Questrial', sans-serif;
+}
+
+#shelter-search-wrapper {
+  width: 100%;
+  height: 200px;
+  background: #ffc046;
 }
 
 #sheltersearch {
-  width: 300px;
-  height: auto;
-  background: #00838f;
-  margin: 100px auto;
-  padding: 20px 0;
+  width: 50%;
+  height: 160px;
+  background: #81d4fa;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 0 0 100% 100%;
+}
+
+#sheltersearch h2 {
+  margin: 0;
+  font-size: 30px;
 }
 
 #shelterzip {
   width: 150px;
   height: 30px;
+  margin-top: 15px;
   text-align: center;
   line-height: 30px;
   font-size: 18px;
@@ -21,11 +35,11 @@
 
 #sheltersearchgo {
   cursor: pointer;
-  width: 100%;
+  width: 200px;
   height: 30px;
   line-height: 30px;
-  margin: 10px 0;
-  background: #ffcc80;
+  margin: 10px auto;
+  background: #ff8f00;
 }
 
 #sheltersearch h5 {
@@ -42,10 +56,36 @@
   justify-content: center;
 }
 
-#shelter-results > div {
+.shelters {
+  position: relative;
   width: 400px;
+  min-height: 70px;
   height: auto;
   margin: 10px;
   padding: 5px;
-  background: rgba(53, 53, 53, .5);
+  background: #81d4fa;
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+
+.shelters h3 {
+  margin: 0 0 5px 0;
+}
+
+.shelters > div {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  background: #ff8f00;
+  margin: 10px 0 0 -5px;
+  bottom: 5px;
+}
+
+.shelters:hover {
+  transition: 500ms;
+  transform: scale(1.05, 1.05);
+}
+
+.shelters:hover > div {
+  background: #ffc046;
 }

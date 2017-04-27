@@ -11,5 +11,5 @@ app.get('/', (req, res, next) => {
   res.sendFile('public/index.html');
 });
 
-const port = process.env.PORT || 3001;
-app.listen(port, () => console.log(`Listening on port:${port}`));
+const port = 3001;
+app.listen(port, () => console.log(`Listening on this port:${port}`));

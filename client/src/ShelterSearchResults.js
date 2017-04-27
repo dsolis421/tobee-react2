@@ -5,9 +5,9 @@ const ShelterSearchResults = props => {
     <div id="shelter-results">
       {props.returnedShelters.map(shelter => {
         return (
-          <div key={shelter.id.$t}>
-            <h3 >{shelter.name.$t}</h3>
-            <span>See Details</span>
+          <div className="shelters" key={shelter.id.$t} id={shelter.id.$t}>
+            <h3>{shelter.name.$t}</h3>
+            <div>See Details</div>
           </div>
         );}
       )}
