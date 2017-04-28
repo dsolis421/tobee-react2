@@ -6,7 +6,7 @@ const ShelterSearchResults = props => {
       {props.returnedShelters.map(shelter => {
         return (
           <div className="shelters" key={shelter.id.$t} id={shelter.id.$t}>
-            <h3>{shelter.name.$t}</h3>
+            <h4>{shelter.name.$t}</h4>
             <div>See Details</div>
           </div>
         );}

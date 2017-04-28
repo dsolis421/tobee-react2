@@ -55,7 +55,7 @@ class ShelterSearch extends Component {
       <div>
         <div id="shelter-search-wrapper">
           <div id="sheltersearch">
-            <h2>Let us help you find a {this.state.greeting}</h2>
+            <h4>Find a Shelter</h4>
             <input id="shelterzip"
               placeholder="Enter Zip Code"
               maxLength="5"
