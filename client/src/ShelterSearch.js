@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import ShelterSearchResults from './ShelterSearchResults';
+import ShelterDetails from './ShelterDetails';
 
 class ShelterSearch extends Component {
   constructor() {
@@ -11,7 +12,10 @@ class ShelterSearch extends Component {
     this.state = {
       shelterSearchText: '',
       returnedShelters: [],
-      greeting: 'pet'
+      greeting: 'pet',
+      showSearchResults: false,
+      showShelterDetail: false,
+      shelterDetail: {}
     };
   }
 
@@ -42,12 +46,28 @@ class ShelterSearch extends Component {
     $.getJSON(`http://api.petfinder.com/shelter.find?location=${zip}&format=json&key=3c73470956892905e562a55f0e113f50&callback=?`)
       .done(response => {
         let shelters = response.petfinder.shelters.shelter;
-        console.log(shelters);
+        console.log('found shelters in ', zip);
         this.setState({
+          showShelterDetail: false,
+          showSearchResults: true,
           returnedShelters: shelters
         });
       })
       .fail(err => console.log('getSheltersByZip error ' + err));
+  }
+
+  getShelterDetail(id) {
+    $.getJSON(`http://api.petfinder.com/shelter.get?id=${id}&format=json&key=3c73470956892905e562a55f0e113f50&callback=?`)
+    .done(response => {
+      let shelterdetail = response.petfinder.shelter;
+      console.log('found shelter ', shelterdetail.name.$t);
+      this.setState({
+        showSearchResults: false,
+        showShelterDetail: true,
+        shelterDetail: shelterdetail
+      });
+    })
+    .fail(err => console.log('getShelterDetail ', err));
   }
 
   render() {
@@ -66,7 +86,16 @@ class ShelterSearch extends Component {
             <span>Powered by <a href="www.petfinder.com" target="blank">Petfinder</a></span>
           </div>
         </div>
-        <ShelterSearchResults returnedShelters={this.state.returnedShelters} />
+        <div id="shelter-results">
+          {this.state.showSearchResults ?
+            this.state.returnedShelters.map(shelter => {
+              return <ShelterSearchResults key={shelter.id.$t} id={shelter.id.$t}
+                shelterName={shelter.name.$t}
+                showDetail={this.getShelterDetail.bind(this)} />;
+            }) : null}
+          {this.state.showShelterDetail ?
+            <ShelterDetails shelterName={this.state.shelterDetail.name.$t} /> : null}
+        </div>
       </div>
     );
   }

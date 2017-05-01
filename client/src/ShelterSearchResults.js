@@ -2,16 +2,11 @@ import React from 'react';
 
 const ShelterSearchResults = props => {
   return (
-    <div id="shelter-results">
-      {props.returnedShelters.map(shelter => {
-        return (
-          <div className="shelters" key={shelter.id.$t} id={shelter.id.$t}>
-            <h4>{shelter.name.$t}</h4>
+          <div className="shelters"
+            id={props.id} onClick={() => props.showDetail(props.id)}>
+            <h4>{props.shelterName}</h4>
             <div>See Details</div>
           </div>
-        );}
-      )}
-    </div>
   );
 }
 
