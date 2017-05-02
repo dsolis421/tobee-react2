@@ -96,3 +96,20 @@
 .shelters:hover > div {
   background: #ffc046;
 }
+
+.shelter-detail {
+  width: 80%;
+  height: auto;
+  background: #81d4fa;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.shelter-detail .fa-reply {
+  color: #ff8f00;
+  float: right;
+  margin: 20px;
+  font-size: 30px;
+  transform: rotate(10deg);
+  cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import ShelterSearchResults from './ShelterSearchResults';
-import ShelterDetails from './ShelterDetails';
+import ShelterDetail from './ShelterDetail';
 
 class ShelterSearch extends Component {
   constructor() {
@@ -10,7 +10,7 @@ class ShelterSearch extends Component {
     this.greetingIterator = 1;
 
     this.state = {
-      shelterSearchText: '',
+      shelterSearchZip: '',
       returnedShelters: [],
       greeting: 'pet',
       showSearchResults: false,
@@ -38,11 +38,12 @@ class ShelterSearch extends Component {
 
   handleSearchChange(e) {
     this.setState({
-      shelterSearchText: e.target.value
+      shelterSearchZip: e.target.value
     });
   }
 
-  getSheltersByZip(zip) {
+  getSheltersByZip() {
+    let zip = this.state.shelterSearchZip;
     $.getJSON(`http://api.petfinder.com/shelter.find?location=${zip}&format=json&key=3c73470956892905e562a55f0e113f50&callback=?`)
       .done(response => {
         let shelters = response.petfinder.shelters.shelter;
@@ -60,7 +61,7 @@ class ShelterSearch extends Component {
     $.getJSON(`http://api.petfinder.com/shelter.get?id=${id}&format=json&key=3c73470956892905e562a55f0e113f50&callback=?`)
     .done(response => {
       let shelterdetail = response.petfinder.shelter;
-      console.log('found shelter ', shelterdetail.name.$t);
+      console.log('found shelter ', shelterdetail);
       this.setState({
         showSearchResults: false,
         showShelterDetail: true,
@@ -80,7 +81,7 @@ class ShelterSearch extends Component {
               placeholder="Enter Zip Code"
               maxLength="5"
               onChange={event => this.handleSearchChange(event)}></input>
-            <div id="sheltersearchgo" onClick={() => this.getSheltersByZip(this.state.shelterSearchText)}>
+            <div id="sheltersearchgo" onClick={() => this.getSheltersByZip()}>
               Search Shelters <span className="fa fa-search"></span>
             </div>
             <span>Powered by <a href="www.petfinder.com" target="blank">Petfinder</a></span>
@@ -94,7 +95,14 @@ class ShelterSearch extends Component {
                 showDetail={this.getShelterDetail.bind(this)} />;
             }) : null}
           {this.state.showShelterDetail ?
-            <ShelterDetails shelterName={this.state.shelterDetail.name.$t} /> : null}
+            <ShelterDetail shelterName={this.state.shelterDetail.name.$t}
+              shelterEmail={this.state.shelterDetail.email.$t}
+              shelterPhone={this.state.shelterDetail.phone.$t}
+              shelterCity={this.state.shelterDetail.city.$t}
+              shelterState={this.state.shelterDetail.state.$t}
+              shelterLong={this.state.shelterDetail.longitude.$t}
+              shelterLat={this.state.shelterDetail.latitude.$t}
+              resetResult={this.getSheltersByZip.bind(this)}/> : null}
         </div>
       </div>
     );
