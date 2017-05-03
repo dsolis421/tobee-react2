@@ -95,7 +95,8 @@ class ShelterSearch extends Component {
                 showDetail={this.getShelterDetail.bind(this)} />;
             }) : null}
           {this.state.showShelterDetail ?
-            <ShelterDetail shelterName={this.state.shelterDetail.name.$t}
+            <ShelterDetail shelterID={this.state.shelterDetail.id.$t} 
+              shelterName={this.state.shelterDetail.name.$t}
               shelterEmail={this.state.shelterDetail.email.$t}
               shelterPhone={this.state.shelterDetail.phone.$t}
               shelterCity={this.state.shelterDetail.city.$t}

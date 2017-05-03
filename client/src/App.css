@@ -98,7 +98,7 @@
 }
 
 .shelter-detail {
-  width: 80%;
+  width: 1000px;
   height: auto;
   background: #81d4fa;
   text-align: left;
@@ -112,4 +112,49 @@
   font-size: 30px;
   transform: rotate(10deg);
   cursor: pointer;
+}
+
+.shelter-detail > div > div {
+  float: left;
+}
+
+.shelter-detail > div > div:first-of-type {
+ width: 410px;
+ height: auto;
+}
+
+.shelter-detail > div > div:last-of-type {
+ width: 570px;
+ height: auto;
+}
+
+.available-pet {
+  float: left;
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+.available-pet > div {
+  float: left;
+}
+
+.available-pet > div:first-of-type {
+  width: 150px;
+  height: 100%;
+}
+
+.available-pet > div:last-of-type {
+  width: 420px;
+  height: auto;
+  padding: 10px;
+}
+
+.available-pet > div:last-of-type h3 {
+  margin: 0 0 10px 0;
+}
+
+.available-pet > div > img {
+  width: 100%;
+  height: auto;
 }
